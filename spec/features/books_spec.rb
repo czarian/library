@@ -2,6 +2,8 @@ require "rails_helper"
 
 RSpec.feature "books" do
 
+  let!(:user) { FactoryGirl.create(:user) }
+
   let!(:book) { FactoryGirl.build(:book, title: 'Traveling') }
 
   def generate_book_list
@@ -13,6 +15,8 @@ RSpec.feature "books" do
 
 
   scenario "Add new book" do
+
+    login_as(user, :scope => :user)
 
     visit new_book_path
     fill_in "Title", with: book.title
@@ -28,6 +32,7 @@ RSpec.feature "books" do
   end
 
   scenario "Edit book" do
+    login_as(user, :scope => :user)
     visit new_book_path
     fill_in "Title", with: book.title
     fill_in "Author", with: book.author
@@ -57,6 +62,7 @@ RSpec.feature "books" do
   end
 
   scenario "Delete book" do
+    login_as(user, :scope => :user)
     generate_book_list
 
     visit edit_book_path(:id => 4)
@@ -71,6 +77,26 @@ RSpec.feature "books" do
   scenario "Visit index without books" do
     visit books_path
     expect(page).to have_content("There are no books")
+  end
+
+  scenario "Rent a book" do
+    login_as(user, :scope => :user)
+    generate_book_list
+
+    visit book_path(:id => 4)
+    click_on("Borrow")
+    expect(page).to have_content("Return")
+  end
+
+  scenario "Return a book" do
+    login_as(user, :scope => :user)
+    generate_book_list
+
+    visit book_path(:id => 4)
+    click_on("Borrow")
+    expect(page).to have_content("Return")
+    click_on("Return")
+    expect(page).to have_content("Borrow")
   end
 
 

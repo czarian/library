@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!,  only: [:create, :update, :borrow, :return]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :borrow, :return]
 
   def new
     @book = Book.new
@@ -38,6 +39,24 @@ class BooksController < ApplicationController
   end
 
   def edit
+  end
+
+  def borrow
+    @rental = Rental.new
+    @rental.date_from = DateTime.now.to_date
+    @rental.date_to = DateTime.now.to_date
+    @rental.status = :active
+    @rental.book = @book
+    @rental.user = current_user
+    @rental.save
+    redirect_to @book
+  end
+
+  def return
+    @rental = Rental.activeRentedBook(@book.id).first
+    @rental.status = :inactive
+    @rental.save
+    redirect_to @book
   end
 
 
