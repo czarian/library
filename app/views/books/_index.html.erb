@@ -1,0 +1,23 @@
+<div class="row top-buffer">
+    <% if @books.empty? %>
+      <div class="panel-heading">There are no books</div>
+    <% else %>
+      <% @books.each do |book| %>
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail">
+          <div class = "caption">
+
+            <h3><%= book.title %></h3>
+            <h5>
+              <%= book.author %>
+            </h5>
+            <p><%= link_to "Show more", book, class: "btn btn-default" %></p>
+
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+
+</div>

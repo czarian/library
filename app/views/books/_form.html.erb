@@ -1,0 +1,33 @@
+<%= form_for @book, html: {class: "form-inline"} do |f| %>
+
+
+
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, autocomplete: "off", class: "form-control"  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :author %>
+      <%= f.text_field :author, autocomplete: "off", class: "form-control"  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :publisher %>
+      <%= f.text_field :publisher, autocomplete: "off", class: "form-control"  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_field :description, autocomplete: "off", class: "form-control"  %>
+    </div>
+
+
+    <%= f.submit "Save", class: "btn btn-primary" %>
+
+    <% if @book.present? %>
+      <%= f.submit "Delete", name: 'delete', class: "btn btn-primary" %>
+    <% end %>
+
+
+<% end %>
