@@ -5,6 +5,11 @@ class Book < ActiveRecord::Base
   validates :publisher, presence: true
   has_many :rentals
 
-  scope :activeById, -> (id){ where(:status => true, :id => id).first }
+  scope :byId, ->(id) { where("id=#{id}", id) }
+  scope :byStatusActive, -> {where(:status => true) }
+
+scope :activeBook, ->(id) {byId(id).byStatusActive.first}
+
+  #scope :activeById, -> (id){ where(:status => true, :id => id).first }
 
 end

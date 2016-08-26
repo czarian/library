@@ -64,7 +64,7 @@ class BooksController < ApplicationController
   private
 
   def set_book
-    @book = Book.activeById(params[:id])
+    @book = Book.activeBook(params[:id])
   end
 
   def book_params

@@ -25,7 +25,7 @@
 
     <%= f.submit "Save", class: "btn btn-primary" %>
 
-    <% if @book.present? %>
+    <% if !@book.title.nil? %>
       <%= f.submit "Delete", name: 'delete', class: "btn btn-primary" %>
     <% end %>
 
