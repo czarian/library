@@ -19,6 +19,9 @@ class BooksController < ApplicationController
     if params[:delete]
       @book.status = false
       @book.save
+      @book.rentals.each do |rental|
+        rental.destroy
+      end
       redirect_to books_path, notice: 'Book deleted'
 
     else

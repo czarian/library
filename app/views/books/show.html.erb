@@ -9,8 +9,9 @@
         <% if !@book.rentals.activeRentedBook(@book.id).first.present? %>
           <%= link_to "Borrow", borrow_book_path(@book), class: "btn btn-primary", method: :post %>
         <% else %>
-          <%= link_to "Return", return_book_path(@book), class: "btn btn-primary", method: :post %>
-
+          <% if @book.rentals.activeRentedBook(@book.id).first.user == current_user %>
+            <%= link_to "Return", return_book_path(@book), class: "btn btn-primary", method: :post %>
+          <% end %>
         <% end %>
 
         <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary" %>

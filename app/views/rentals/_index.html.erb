@@ -1,28 +1,22 @@
-<div class="row top-buffer">
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Rentals</div>
     <% if rentals.empty? %>
-      <div class="panel-heading">There are no books</div>
+      <div class="panel-heading">There's no rentals yet</div>
     <% else %>
-      <% rentals.each do |rental| %>
-      <div class="col-sm-6 col-md-3">
-        <div class="thumbnail">
-          <div class = "caption">
-
-            <h3><%= rental.book.title %></h3>
-            <h5>
-              <%= rental.book.author %>
-            </h5>
-            <h5>
-              <%= rental.user.email %>
-            </h5>
-
-            <h6><%= rental.status %></h6>
-            <p><%= link_to "Show book", rental.book, class: "btn btn-default" %></p>
-
-          </div>
-        </div>
-      </div>
+      <table class="table">
+        <tbody>
+          <tr><th>Book title</th><th>Author</th><th>User</th><th>Status</th></tr>
+          <% rentals.each do |rental| %>
+            <tr>
+              <td><%= rental.book.title %></td>
+              <td><%= rental.book.author %></td>
+              <td><%= rental.user.email %></td>
+              <td><%= rental.status %></td>
+              <td><%= link_to "Show book", rental.book, class: "btn btn-default" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% end %>
-  <% end %>
-
-
 </div>
