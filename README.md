@@ -6,23 +6,15 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+  2.2.3
 
 * System dependencies
 
 * Configuration
+ENV["CLIENT_ID"], ENV["CLIENT_SECRET"] for login with google account
 
-* Database creation
-
-* Database initialization
 
 * How to run the test suite
+  rspec spec/features
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
