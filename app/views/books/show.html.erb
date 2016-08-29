@@ -14,4 +14,7 @@
         <% end %>
 
         <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary" %>
+
+        <h2>Rentals</h2>
+        <%= render "rentals/index", rentals: @book.rentals.byBookOrderByStatus(@book.id) %>
 </div>

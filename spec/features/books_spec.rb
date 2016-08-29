@@ -99,5 +99,27 @@ RSpec.feature "books" do
     expect(page).to have_content("Borrow")
   end
 
+  scenario "Show borrow list" do
+    login_as(user, :scope => :user)
+    generate_book_list
+
+    10.times do |i|
+      visit book_path(:id => i+1)
+      click_on("Borrow")
+      click_on("Return")
+    end
+
+    visit book_path(:id => 4)
+    click_on("Borrow")
+
+    visit rentals_path
+
+    10.times do |i|
+      expect(page).to have_content("Traveling#{i}")
+    end
+
+
+  end
+
 
 end

@@ -10,7 +10,8 @@ scope :byStatusActive, -> {where("status = 1") }
 
 scope :activeRentedBook, ->(book_id) {byBookId(book_id).byStatusActive}
 
-  #scope :activeRentedBook, ->(book_id) { where(:statuds => :active),book_id}
+scope :byBookOrderByStatus, ->(book_id) {byBookId(book_id).order(status: :DESC)}
+
 
 
 end
